@@ -63,3 +63,19 @@ Save with **Ctrl+S**, then:
 git add README.md
 git commit -m "docs: rewrite README"
 git push
+------------------
+P.S : ## SSR — What I tried and why I switched
+
+The original implementation used Next.js async server components for SSR. `page.tsx` was a server component that fetched products from fakestoreapi.com before sending HTML to the browser. This worked perfectly in local development.
+
+On both Netlify and Vercel, the SSR fetch silently returned empty data. The build logs showed the page being pre-rendered as a static page at build time ("Generating static pages"), and fakestoreapi.com was either unreachable or timing out on the hosting build servers during that step. Multiple approaches were tried:
+
+- `cache: 'no-store'` to prevent caching
+- A Next.js Route Handler as a server-side proxy (`/api/products`)
+- `export const dynamic = 'force-dynamic'` to prevent static generation
+
+None of these resolved the issue in a hosted environment.
+
+The final solution was moving data fetching to the client using `useEffect`. The page shell is still server-rendered with all SEO metadata, schema, H1/H2 tags, and layout intact. Products load client-side after hydration.
+
+The full SSR implementation is visible in the git history if you want to review what was attempte
