@@ -1,59 +1,65 @@
-# Appscrip Task — Product Listing Page
+# Appscrip-task-chayan
 
-A production-ready Product Listing Page built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**. Implements SSR, full SEO coverage, responsive layout, and live product data from a mock API.
+Product listing page built as part of the Appscrip frontend assignment.
 
-## Live Demo
+**Live:** https://frolicking-begonia-f230d3.netlify.app
 
-[View on Netlify](#) <!-- replace with your Netlify URL -->
+---
 
-## Tech Stack
+## What I built
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS (zero component libraries)
-- **Data**: [Fake Store API](https://fakestoreapi.com)
-- **Rendering**: Server-Side Rendering (SSR) via async server components
+A product listing page using Next.js 14 (App Router) and Tailwind CSS. Pulls product data from the Fake Store API and renders a filterable, sortable grid.
 
-## Features
+No UI libraries used -- everything is built from scratch including the filter sidebar, sort dropdown, and icons (inline SVG).
 
-- Server-side rendered product grid — HTML is pre-built on the server before reaching the browser
-- Category filtering with live product count
-- Sort by: Recommended, Newest, Popular, Price High/Low
-- Wishlist toggle per product
-- Mobile drawer filter sidebar
-- Fully responsive: 2-col mobile / 3-col tablet / 4-col desktop
-- Sticky header with nav, search, bag, account icons
-- Accordion footer with newsletter signup, social links, payment badges
+## Stack
 
-## SEO
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Fake Store API
 
-- `<title>` and `<meta description>` via Next.js Metadata API
-- Open Graph and Twitter card tags
-- Semantic `H1` (hero) and `H2` (footer sections, filter categories)
-- JSON-LD structured data: `BreadcrumbList` + `Product` schema
-- SEO-friendly image `alt` text derived from product titles
-- Optimised images via `next/image` with lazy loading
+## Things I focused on
 
-## Project Structure
+**SEO** -- title, meta description, Open Graph tags, JSON-LD breadcrumb schema, semantic H1/H2 tags, and alt text on every image derived from the product name.
 
-├── app/ │ ├── layout.tsx # Root layout + SEO metadata │ ├── page.tsx # SSR entry — fetches products & categories │ └── globals.css # Base styles + Tailwind layers ├── components/ │ ├── ProductListingPage.tsx # Client shell — state management │ ├── Header.tsx # Sticky header + nav │ ├── HeroSection.tsx # H1 hero block │ ├── ControlsBar.tsx # Item count + sort dropdown │ ├── FilterSidebar.tsx # Category filter + accordion │ ├── ProductCard.tsx # Product tile with wishlist │ ├── Footer.tsx # Newsletter + links + payments │ └── Icons.tsx # SVG icon components
+**Responsiveness** -- 2 columns on mobile, 3 on tablet, 4 on desktop. Filter sidebar becomes a drawer on mobile.
 
+**Code structure** -- each component has a single responsibility. No logic dumped into one file.
 
-## Getting Started
+**Minimal dependencies** -- just Next.js, React, Tailwind. No component libraries.
+
+## Run locally
 
 ```bash
 npm install
 npm run dev
 Open http://localhost:3000
 
-Build & Deploy
-npm run build
-npm start
-Deploying to Netlify
-Push this repo to GitHub
-Connect the repo on netlify.com
-Set build command: npm run build
-Set publish directory: .next
-Deploy
-Design Reference
-Figma: Design Task - PLP
+Folder structure
+app/
+  layout.tsx     # metadata and root layout
+  page.tsx       # entry point
+  globals.css
+
+components/
+  Header.tsx
+  HeroSection.tsx
+  ControlsBar.tsx
+  FilterSidebar.tsx
+  ProductCard.tsx
+  ProductListingPage.tsx
+  Footer.tsx
+  Icons.tsx
+Design reference
+https://www.figma.com/file/N0Tv7yYLf3kfMLQjUncUlx/Design-Task---PLP
+
+
+---
+
+Save with **Ctrl+S**, then:
+
+```bash
+git add README.md
+git commit -m "docs: rewrite README"
+git push
