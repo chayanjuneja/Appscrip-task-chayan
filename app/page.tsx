@@ -1,24 +1,26 @@
 import { Suspense } from 'react'
 import ProductListingPage from '../components/ProductListingPage'
 
-async function getProducts() {
-  try {
-    const res = await fetch('https://fakestoreapi.com/products', { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch { return [] }
-}
-
-async function getCategories() {
-  try {
-    const res = await fetch('https://fakestoreapi.com/products/categories', { cache: 'no-store' })
-    if (!res.ok) return []
-    return res.json()
-  } catch { return [] }
-}
+export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const [products, categories] = await Promise.all([getProducts(), getCategories()])
+  let products = []
+  let categories = []
+
+  try {
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NETLIFY_URL
+      ? `https://${process.env.NETLIFY_URL}`
+      : 'http://localhost:3000'
+
+    const res = await fetch(`${baseUrl}/api/products`, { cache: 'no-store' })
+    const data = await res.json()
+    products = data.products
+    categories = data.categories
+  } catch {
+    // products stay empty, client will hydrate
+  }
 
   const schema = {
     '@context': 'https://schema.org',
