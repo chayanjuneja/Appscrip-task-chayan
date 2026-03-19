@@ -3,7 +3,7 @@ import ProductListingPage from '../components/ProductListingPage'
 
 async function getProducts() {
   try {
-    const res = await fetch('https://fakestoreapi.com/products', { next: { revalidate: 3600 } })
+    const res = await fetch('https://fakestoreapi.com/products', { cache: 'no-store' })
     if (!res.ok) return []
     return res.json()
   } catch { return [] }
@@ -11,7 +11,7 @@ async function getProducts() {
 
 async function getCategories() {
   try {
-    const res = await fetch('https://fakestoreapi.com/products/categories', { next: { revalidate: 3600 } })
+    const res = await fetch('https://fakestoreapi.com/products/categories', { cache: 'no-store' })
     if (!res.ok) return []
     return res.json()
   } catch { return [] }
